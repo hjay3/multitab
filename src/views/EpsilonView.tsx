@@ -6,7 +6,8 @@ import Badge from '../components/Badge';
 
 const EpsilonView = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-
+  const [imageLoadError, setImageLoadError] = useState<Record<number, boolean>>({});
+  
   const images = [
     {
       url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
@@ -41,11 +42,18 @@ const EpsilonView = () => {
           >
             <Card className="p-0 overflow-hidden">
               <div className="relative">
-                <img
-                  src={img.url}
-                  alt={img.title}
-                  className="w-full h-64 object-cover"
-                />
+                 <img
+                    src={img.url}
+                    alt={img.title}
+                    className="w-full h-64 object-cover"
+                    onError={() => setImageLoadError(prev => ({ ...prev, [i]: true }))}
+                    style={{ display: imageLoadError[i] ? 'none' : 'block' }}
+                   />
+                   {imageLoadError[i] && (
+                    <div className="w-full h-64 bg-gray-800 flex items-center justify-center">
+                    <span className="text-gray-400">Image failed to load</span>
+                    </div>
+                   )}
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent opacity-60" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="text-xl font-bold">{img.title}</h3>
