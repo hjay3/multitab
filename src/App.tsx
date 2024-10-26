@@ -15,6 +15,11 @@ const tabs = [
   { id: 'epsilon', label: 'Epsilon', icon: <Database className="w-5 h-5" /> },
 ];
 
+
+ type TabId = 'alpha' | 'beta' | 'gamma' | 'delta' | 'epsilon';
+ 
+ const [activeTab, setActiveTab] = useState<TabId>('alpha');
+
 function App() {
   const [activeTab, setActiveTab] = useState('alpha');
 
