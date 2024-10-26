@@ -1,7 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Navbar = ({ tabs, activeTab, setActiveTab }) => {
+ interface NavbarProps {
+  tabs: {
+  id: string;
+  label: string;
+  icon: React.ReactNode;
+  }[];
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+ }
+
+
+ const Navbar: React.FC<NavbarProps> = ({ tabs, activeTab, setActiveTab }) => {
   return (
     <nav className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700">
       <div className="container mx-auto px-4">
