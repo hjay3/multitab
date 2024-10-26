@@ -18,6 +18,18 @@ const GammaView = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const lightningInterval = setInterval(() => {
+      setShowLightning(true);
+      const timeout = setTimeout(() => setShowLightning(false), 200);
+    return () => clearTimeout(timeout);
+   }, 3000);
+ 
+    return () => {
+   clearInterval(lightningInterval);
+  };
+ }, []);
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
